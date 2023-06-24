@@ -49,10 +49,37 @@
         font-weight: bold;
       }
     }
-    p{
-        color: #5d5b8d;
-        font-size: small;
-        margin-top: 10px;
+    p {
+      color: #5d5b8d;
+      font-size: small;
+      margin-top: 10px;
     }
   }
 }
+
+.home {
+  background-color: #a7bcff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 65%;
+    height: 80%;
+    display: flex;
+    overflow: hidden;
+    .sidebar {
+      flex: 1;
+      border-right: 1px solid #3e3c61;
+    }
+    .chat{
+      flex: 2;
+    }
+}
+
+
+}
+
