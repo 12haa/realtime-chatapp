@@ -1,6 +1,8 @@
 * {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 0;
+  margin: 0;
 }
 .formContainer {
   background-color: #a7bcff;
@@ -111,28 +113,42 @@
           input {
             background-color: transparent;
             border: none;
+
+            border-bottom: 1px solid lightgray;
             color: white;
             outline: none;
+            line-height: 40px;
+            width: 100%;
             &::placeholder {
               color: lightgray;
             }
           }
         }
-        .userChat {
-          padding: 10px;
-          display: flex;
-          align-items: center;
-          color: white;
-          cursor: pointer;
-          gap: 10px;
-          &:hover {
-            background-color: #2f2d52;
+      }
+      .userChat {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        color: white;
+        cursor: pointer;
+        gap: 10px;
+        &:hover {
+          background-color: #2f2d52;
+        }
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+        .userChatInfo {
+          span {
+            font-size: 18px;
+            font-weight: 500;
           }
-          img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
+          p {
+            font-size: 14px;
+            color: lightgray;
           }
         }
       }
@@ -140,6 +156,64 @@
 
     .chat {
       flex: 2;
+      .chatInfo {
+        height: 50px;
+        background-color: #5d5b8d;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        color: lightblue;
+      }
+      .chatIcons {
+        display: flex;
+        gap: 10px;
+        img {
+          height: 24px;
+          cursor: pointer;
+        }
+      }
+
+      .messages {
+        background-color: #ddddf7;
+        padding: 10px;
+        height: calc(100% - 160px);
+      }
+      .input {
+        height: 50px;
+        background-color: #fff;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        input {
+          width: 100%;
+          border: none;
+          outline: none;
+          color: #red;
+          font-size: 18px;
+
+          &::placeholder {
+            color: lightgray;
+          }
+        }
+        .send {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          img {
+            height: 24px;
+            cursor: pointer;
+          }
+          button {
+            border: none;
+            padding: 10px 15px;
+            color: whitesmoke;
+            background-color: #8da4f1;
+          }
+        }
+      }
     }
   }
 }
