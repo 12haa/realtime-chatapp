@@ -4,15 +4,14 @@ const Search = () => {
   return (
     <div className="search">
       <div className="searchForm">
-        <input type="text" placeholder="Find A User :)" />
+        <input type="text" placeholder="Find a user" onKeyDown />
       </div>
+      <span>User not found!</span>
+
       <div className="userChat">
-        <img
-          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60"
-          alt=""
-        />
+        <img src />
         <div className="userChatInfo">
-          <span>Jack</span>
+          <span></span>
         </div>
       </div>
     </div>

@@ -1,16 +1,14 @@
 import React from "react";
-
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 const Navbar = () => {
   return (
     <div className="navbar">
-      <span className="logo">Chatty</span>
+      <span className="logo">Lama Chat</span>
       <div className="user">
-        <img
-          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60"
-          alt=""
-        />
+        <img src="https://images.pexels.com/photos/16954207/pexels-photo-16954207/free-photo-of-innocent-kid.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load" />
         <span>John</span>
-        <button>Logout</button>
+        <button onClick={() => signOut(auth)}>logout</button>
       </div>
     </div>
   );

@@ -1,56 +1,58 @@
 import React from "react";
+// import firebase from 'firebase/app';
+import "firebase/firestore";
+import "firebase/auth";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, storage } from "../firebase";
+import { auth, storage, db } from "../firebase";
 import Add from "../images/addAvatar.png";
 import { useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
+import { useNavigate, Link } from "react-router-dom";
+// import firebase from "firebase/app";
+
 const Register = () => {
   const [err, setErr] = useState(false);
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const displayName = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
     const displayFile = e.target[3].files[0];
+
+    //Create user
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(res);
-
       const storageRef = ref(storage, displayName);
-
-      const uploadTask = uploadBytesResumable(storageRef, file);
+      const uploadTask = uploadBytesResumable(storageRef, displayFile);
 
       uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // Observe state change events such as progress, pause, and resume
-          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
-          }
-        },
         (error) => {
-          // Handle unsuccessful uploads
           setErr(true);
         },
         () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateProfile(res.user, {displayName  , 
-            photoURL :downloadURL});
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadUrl) => {
+            await updateProfile(res.user, {
+              displayName,
+              photoURL: downloadUrl,
+            });
+            console.log(res, "im response");
+            await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
+              displayName,
+              email,
+              photoURL: downloadUrl,
+            });
+
+            await setDoc(doc(db, "userChats ", res.user.uid), {});
+            navigate("/");
           });
         }
       );
     } catch (err) {
-      setErr(true);
       console.log(err);
+      setErr(true);
     }
   };
 
@@ -72,9 +74,11 @@ const Register = () => {
             <span>Add an avatar</span>
           </label>
           <button>Sign up</button>
-          {err && <span>Something went WrongW</span>}
+          {err && <span>Something went Wrong</span>}
         </form>
-        <p></p>
+        <p>
+          You do have an account? <Link to="/login">Login</Link>
+        </p>
       </div>
     </div>
   );
