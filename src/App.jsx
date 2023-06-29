@@ -14,7 +14,7 @@ const App = () => {
     if (!currentUser) {
       return <Navigate to="/login" />;
     }
-    return children
+    return children;
   };
 
   return (
@@ -33,8 +33,6 @@ const App = () => {
           <Route path="register" element={<Register />} />
         </Route>
       </Routes>
-      // <Login />
-      <Home />
     </div>
   );
 };
